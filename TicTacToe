@@ -1,0 +1,226 @@
+public class TicTac extends Frame implements ActionListener {
+	String name, name1;
+	Font fr = new Font("Terminal", Font.BOLD, 19);
+	//Components
+	Label l1, l2;
+	TextField tf1, tf2, tf3;
+	Button b1, b2, b3, b4, b5, b6, b7, b8, b9, br;
+	int c = 0;
+	public TicTac() {
+		Color c1 = new Color(0, 255, 255);
+		// Layout
+		setLayout(null);
+		// Frame
+		setVisible(true);
+		setBackground(c1);
+		setSize(600, 650);
+		setLocation(150, 30);
+	}
+	public void create() {
+		Font f = new Font("Terminal", 2, 25);
+		Font f1 = new Font("Franklin Gothic", Font.BOLD, 21);
+
+		// Adding Components on Frame
+		l1 = new Label("Enter Your Name");
+		Color lc1 = new Color(64, 0, 128);
+		l1.setForeground(lc1);
+		l1.setFont(f);
+		l1.setLocation(10, 60);
+		l1.setSize(210, 100);
+		add(l1);
+
+		tf1 = new TextField();
+		Color tc1 = new Color(0, 113, 56);
+		tf1.setForeground(Color.red);
+		tf1.setFont(f1);
+		tf1.setLocation(230, 100);
+		tf1.setSize(290, 30);
+		add(tf1);
+		br = new Button("Play Again");
+
+		br.setFont(fr);
+		br.setLocation(15, 500);
+		br.setForeground(Color.red);
+		br.setSize(100, 50);
+		add(br);
+
+		l2 = new Label("Enter Your Name");
+		Color lc2 = new Color(0, 128, 0);
+		l2.setForeground(lc2);
+		l2.setFont(f);
+		l2.setLocation(10, 170);
+		l2.setSize(210, 100);
+		add(l2);
+
+		tf2 = new TextField();
+		Color lf2 = new Color(0, 0, 174);
+		tf2.setForeground(lf2);
+		tf2.setFont(f1);
+		tf2.setLocation(230, 210);
+		tf2.setSize(290, 30);
+		add(tf2);
+
+		tf3 = new TextField();
+		tf3.setFont(f1);
+		tf3.setLocation(60, 590);
+		tf3.setSize(500, 39);
+		add(tf3);
+
+		int x = 120, y = 300;
+
+		b1 = new Button();
+		b1.setLocation(x, y);
+		b1.setSize(100, 90);
+		x = x + 100;
+		add(b1);
+		b2 = new Button();
+		b2.setLocation(x, y);
+		b2.setSize(100, 90);
+		x = x + 100;
+		add(b2);
+		b3 = new Button();
+		b3.setLocation(x, y);
+		b3.setSize(100, 90);
+		x = x + 100;
+		add(b3);
+		b4 = new Button();
+		x = 120;
+		y = y + 90;
+		b4.setLocation(x, y);
+		b4.setSize(100, 90);
+		add(b4);
+		b5 = new Button();
+		x = x + 100;
+		b5.setLocation(x, y);
+		b5.setSize(100, 90);
+		add(b5);
+		b6 = new Button();
+		x = x + 100;
+		b6.setLocation(x, y);
+		b6.setSize(100, 90);
+		add(b6);
+		b7 = new Button();
+		x = 120;
+		y = y + 90;
+		b7.setLocation(x, y);
+		b7.setSize(100, 90);
+		add(b7);
+		b8 = new Button();
+		x = x + 100;
+		b8.setLocation(x, y);
+		b8.setSize(100, 90);
+		add(b8);
+		b9 = new Button();
+		x = x + 100;
+		b9.setLocation(x, y);
+		b9.setSize(100, 90);
+		add(b9);
+
+		b1.addActionListener(this);
+		b2.addActionListener(this);
+		b3.addActionListener(this);
+		b4.addActionListener(this);
+		b5.addActionListener(this);
+		b6.addActionListener(this);
+		b7.addActionListener(this);
+		b8.addActionListener(this);
+		b9.addActionListener(this);
+		br.addActionListener(this);
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == br) {
+			c = 0;
+			tf1.setText("");
+			tf2.setText("");
+			tf3.setText("");
+			b1.setLabel("");
+			b2.setLabel("");
+			b3.setLabel("");
+			b4.setLabel("");
+			b5.setLabel("");
+			b6.setLabel("");
+			b7.setLabel("");
+			b8.setLabel("");
+			b9.setLabel("");
+
+			b1.addActionListener(this);
+			b2.addActionListener(this);
+			b3.addActionListener(this);
+			b4.addActionListener(this);
+			b5.addActionListener(this);
+			b6.addActionListener(this);
+			b7.addActionListener(this);
+			b8.addActionListener(this);
+			b9.addActionListener(this);
+			br.setLabel("Play Again");
+			br.setFont(fr);
+		}
+		Font f = new Font("Verdana", Font.BOLD, 55);
+		Button b = (Button) e.getSource();
+		if (b == br) {
+			c = -1;
+		}
+		b.setFont(f);
+		name1 = tf2.getText();
+		name = tf1.getText();
+		br.setFont(fr);
+		boolean check = checkWon();
+		if (c % 2 == 0) {
+			if (check == true) {
+				b.setLabel(" ");
+			} else {
+				name1 = tf2.getText();
+				tf3.setForeground(Color.RED);
+				tf3.setText("\t\t " + name1 + " Turn");
+				b.setForeground(Color.red);
+				b.setLabel("X");
+				b.removeActionListener(this);
+			}
+			if (c == 8) {
+				tf3.setText(" ");
+			}
+		}
+		if (c % 2 != 0 && c != -1) {
+			if (check == true) {
+				b.setLabel("");
+			} else {
+				name = tf1.getText();
+				tf3.setForeground(Color.BLUE);
+				tf3.setText("\t\t " + name + " Turn");
+				b.setForeground(Color.yellow);
+				b.setLabel("0");
+				b.removeActionListener(this);
+			}
+		}
+		c++;
+	}
+	public void paint(Graphics g) {
+		Font f = new Font("Verdana", Font.BOLD, 30);
+		g.setFont(f);
+		g.setColor(Color.yellow);
+		g.drawString("PLAYER1", 250, 80);
+		g.setColor(Color.magenta);
+		g.drawString("PLAYER2", 250, 190);
+	}
+	public boolean checkWon() {
+		int flag = 0;
+		if (b1.getLabel() == "X" && b2.getLabel() == "X" && b3.getLabel() == "X" || b4.getLabel() == "X" && b5.getLabel() == "X" && b6.getLabel() == "X" || b7.getLabel() == "X" && b8.getLabel() == "X" && b9.getLabel() == "X" || b1.getLabel() == "X" && b4.getLabel() == "X" && b7.getLabel() == "X" || b2.getLabel() == "X" && b5.getLabel() == "X" && b8.getLabel() == "X" || b3.getLabel() == "X" && b6.getLabel() == "X" && b9.getLabel() == "X" || b1.getLabel() == "X" && b5.getLabel() == "X" && b9.getLabel() == "X" || b3.getLabel() == "X" && b5.getLabel() == "X" && b7.getLabel() == "X") {
+			tf3.setForeground(Color.magenta);
+			tf3.setText(" Congratulations " + name + " you are the WINNER:)");
+			flag = 1;
+			br.addActionListener(this);
+			return true;
+		} else if (b1.getLabel() == "0" && b2.getLabel() == "0" && b3.getLabel() == "0" || b4.getLabel() == "0" && b5.getLabel() == "0" && b6.getLabel() == "0" || b7.getLabel() == "0" && b8.getLabel() == "0" && b9.getLabel() == "0" || b1.getLabel() == "0" && b4.getLabel() == "0" && b7.getLabel() == "0" || b2.getLabel() == "0" && b5.getLabel() == "0" && b8.getLabel() == "0" || b3.getLabel() == "0" && b6.getLabel() == "0" && b9.getLabel() == "0" || b1.getLabel() == "0" && b5.getLabel() == "0" && b9.getLabel() == "0" || b3.getLabel() == "0" && b5.getLabel() == "0" && b7.getLabel() == "0") {
+			tf3.setForeground(Color.blue);
+			tf3.setText(" Congratulations " + name1 + " you are the WINNER:)");
+			flag = 1;
+			br.addActionListener(this);
+			return true;
+		}
+		return false;
+	}
+	public static void main(String[] args) {
+		TicTac tt = new TicTac();
+		tt.create();
+	}
+}
