@@ -1,0 +1,494 @@
+import java.awt.*;
+import java.awt.event.*;
+import java.lang.Float;
+
+public class Calculator extends Frame implements ActionListener {
+	// Components
+	TextArea ta1;
+	TextField ta2;
+	Button b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, bd, bm, bp, bs, be, bc;
+	Font fo = new Font("Segoe UI Symbol", Font.BOLD, 30);
+	String n1, n3, n2, ans;
+	String inp[] = new String[55];
+	int index = -1;
+	Label l1;
+	Color cl = new Color(141, 235, 235);
+	Color c2 = new Color(69, 138, 160);
+	Color c3 = new Color(86, 134, 192);
+	Color c4 = new Color(255, 255, 108);
+	public Calculator() {
+		// Frame
+		setVisible(true);
+		setSize(450, 560);
+		setLocation(200, 40);
+		setForeground(Color.black);
+		setTitle("Calculator");
+		setBackground(Color.gray);
+		// Layout
+		setLayout(null);
+
+		ta1 = new TextArea();
+		ta1.setSize(450, 100);
+		ta1.setLocation(20, 40);
+		ta1.setForeground(Color.black);
+		ta1.setFont(fo);
+		add(ta1);
+
+		ta2 = new TextField();
+		ta2.setSize(450, 100);
+		ta2.setLocation(20, 140);
+		ta2.setForeground(Color.black);
+		ta2.setFont(fo);
+		add(ta2);
+
+		b7 = new Button("7");
+		b7.setSize(70, 58);
+		b7.setLocation(40, 260);
+		b7.setFont(fo);
+		b7.addActionListener(this);
+		b7.setBackground(cl);
+		add(b7);
+
+		b8 = new Button("8");
+		b8.setSize(70, 58);
+		b8.setLocation(130, 260);
+		b8.addActionListener(this);
+		b8.setFont(fo);
+		b8.setBackground(cl);
+		add(b8);
+
+		b9 = new Button("9");
+		b9.setSize(70, 58);
+		b9.setLocation(220, 260);
+		b9.setBackground(cl);
+		b9.addActionListener(this);
+		b9.setFont(fo);
+		add(b9);
+
+		b4 = new Button("4");
+		b4.setSize(70, 58);
+		b4.setLocation(40, 330);
+		b4.setBackground(cl);
+		b4.addActionListener(this);
+		b4.setFont(fo);
+		add(b4);
+
+		b5 = new Button("5");
+		b5.setSize(70, 58);
+		b5.setLocation(130, 330);
+		b5.setBackground(cl);
+		b5.addActionListener(this);
+		b5.setFont(fo);
+		add(b5);
+
+		b6 = new Button("6");
+		b6.setSize(70, 58);
+		b6.setLocation(220, 330);
+		b6.setBackground(cl);
+		b6.addActionListener(this);
+		b6.setFont(fo);
+		add(b6);
+
+		b3 = new Button("3");
+		b3.setSize(70, 58);
+		b3.setLocation(40, 400);
+		b3.setBackground(cl);
+		b3.addActionListener(this);
+		b3.setFont(fo);
+		add(b3);
+
+		b2 = new Button("2");
+		b2.setSize(75, 58);
+		b2.setLocation(130, 400);
+		b2.setBackground(cl);
+		b2.addActionListener(this);
+		b2.setFont(fo);
+		add(b2);
+
+		b1 = new Button("1");
+		b1.setSize(75, 58);
+		b1.setLocation(220, 400);
+		b1.setBackground(cl);
+		b1.addActionListener(this);
+		b1.setFont(fo);
+		add(b1);
+
+		b0 = new Button("0");
+		b0.setSize(75, 58);
+		b0.setLocation(40, 470);
+		b0.setBackground(cl);
+		b0.addActionListener(this);
+		b0.setFont(fo);
+		add(b0);
+
+		bd = new Button("/");
+		bd.setSize(70, 58);
+		bd.setLocation(360, 260);
+		bd.setBackground(c2);
+		bd.setFont(fo);
+		add(bd);
+
+		bm = new Button("*");
+		bm.setSize(70, 58);
+		bm.setLocation(360, 330);
+		bm.setBackground(c2);
+		bm.setFont(fo);
+		add(bm);
+
+		bp = new Button("+");
+		bp.setSize(70, 58);
+		bp.setLocation(360, 400);
+		bp.setBackground(c2);
+		bp.setFont(fo);
+		add(bp);
+
+		bs = new Button("-");
+		bs.setSize(70, 58);
+		bs.setLocation(360, 470);
+		bs.setBackground(c2);
+		bs.setFont(fo);
+		add(bs);
+
+		be = new Button("=");
+		be.setSize(75, 58);
+		be.setLocation(220, 470);
+		be.setBackground(cl);
+		be.setFont(fo);
+		add(be);
+
+		bc = new Button("C");
+		bc.setSize(70, 58);
+		bc.setLocation(130, 470);
+		bc.setBackground(c3);
+		bc.setFont(fo);
+		add(bc);
+
+		bd.addActionListener(this);
+		bm.addActionListener(this);
+		bp.addActionListener(this);
+		bs.addActionListener(this);
+		be.addActionListener(this);
+		bc.addActionListener(this);
+	}
+	public void paint(Graphics g) {
+		g.drawLine(340, 200, 340, 550); //middle
+		g.drawLine(20, 200, 20, 550); //first
+		g.drawLine(20, 560, 20, 560); //bottom
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == b7) {
+			String check7 = ta1.getText();
+			if (check7.equals(ans)) {
+				ta1.setText(" ");
+			}
+			ta1.setForeground(Color.black);
+			ta1.append("7");
+			n1 = ta2.getText();
+			n2 = "7";
+			n3 = n1 + n2;
+			ta2.setText(n3);
+		}
+		if (e.getSource() == b8) {
+			String check8 = ta1.getText();
+			if (check8.equals(ans)) {
+				ta1.setText(" ");
+			}
+			ta1.setForeground(Color.black);
+			ta1.append("8");
+			n1 = ta2.getText();
+			n2 = "8";
+			n3 = n1 + n2;
+			ta2.setText(n3);
+		}
+		if (e.getSource() == b9) {
+			String check9 = ta1.getText();
+			if (check9.equals(ans)) {
+				ta1.setText(" ");
+			}
+			ta1.setForeground(Color.black);
+			ta1.append("9");
+			n1 = ta2.getText();
+			n2 = "9";
+			n3 = n1 + n2;
+			ta2.setText(n3);
+		}
+		if (e.getSource() == b4) {
+			String check4 = ta1.getText();
+			if (check4.equals(ans)) {
+				ta1.setText(" ");
+			}
+			ta1.setForeground(Color.black);
+			ta1.append("4");
+			n1 = ta2.getText();
+			n2 = "4";
+			n3 = n1 + n2;
+			ta2.setText(n3);
+		}
+		if (e.getSource() == b5) {
+			String check5 = ta1.getText();
+			if (check5.equals(ans)) {
+				ta1.setText(" ");
+			}
+			ta1.setForeground(Color.black);
+			ta1.append("5");
+			n1 = ta2.getText();
+			n2 = "5";
+			n3 = n1 + n2;
+			ta2.setText(n3);
+		}
+		if (e.getSource() == b6) {
+			String check6 = ta1.getText();
+			if (check6.equals(ans)) {
+				ta1.setText(" ");
+			}
+			ta1.setForeground(Color.black);
+			ta1.append("6");
+			n1 = ta2.getText();
+			n2 = "6";
+			n3 = n1 + n2;
+			ta2.setText(n3);
+		}
+		if (e.getSource() == b3) {
+			String check3 = ta1.getText();
+			if (check3.equals(ans)) {
+				ta1.setText(" ");
+			}
+			ta1.setForeground(Color.black);
+			ta1.append("3");
+			n1 = ta2.getText();
+			n2 = "3";
+			n3 = n1 + n2;
+			ta2.setText(n3);
+		}
+		if (e.getSource() == b2) {
+			String check2 = ta1.getText();
+			if (check2.equals(ans)) {
+				ta1.setText(" ");
+			}
+			ta1.setForeground(Color.black);
+			ta1.append("2");
+			n1 = ta2.getText();
+			n2 = "2";
+			n3 = n1 + n2;
+			ta2.setText(n3);
+		}
+		if (e.getSource() == b1) {
+			String check1 = ta1.getText();
+			if (check1.equals(ans)) {
+				ta1.setText(" ");
+			}
+			ta1.setForeground(Color.black);
+			ta1.append("1");
+			n1 = ta2.getText();
+			n2 = "1";
+			n3 = n1 + n2;
+			ta2.setText(n3);
+		}
+		if (e.getSource() == b0) {
+			String check0 = ta1.getText();
+			if (check0.equals(ans)) {
+				ta1.setText(" ");
+			}
+			ta1.setForeground(Color.black);
+			ta1.append("0");
+			n1 = ta2.getText();
+			n2 = "0";
+			n3 = n1 + n2;
+			ta2.setText(n3);
+		}
+		if (e.getSource() == bd) {
+			try {
+				ta1.setForeground(Color.black);
+				ta1.append(" / ");
+				ta2.setText(" ");
+				index++;
+				inp[index] = n3;
+				index++;
+				inp[index] = "/";
+			} catch (Exception o4) {
+				ta1.setText("" + o4);
+			}
+		}
+		if (e.getSource() == bm) {
+			try {
+				ta1.setForeground(Color.black);
+				ta1.append(" * ");
+				ta2.setText(" ");
+				index++;
+				inp[index] = n3;
+				index++;
+				inp[index] = "*";
+			} catch (Exception o3) {
+				ta1.setText("" + o3);
+			}
+		}
+		if (e.getSource() == bp) {
+			try {
+				ta1.setForeground(Color.black);
+				ta1.append(" + ");
+				ta2.setText(" ");
+				index++;
+				inp[index] = n3;
+				index++;
+				inp[index] = "+";
+			} catch (Exception o2) {
+				ta1.setText("" + o2);
+			}
+		}
+		if (e.getSource() == bs) {
+			try {
+				ta1.setForeground(Color.black);
+				ta1.append(" - ");
+				ta2.setText(" ");
+				index++;
+				inp[index] = n3;
+				index++;
+				inp[index] = "-";
+			} catch (Exception o1) {
+				ta1.setText("" + o1);
+			}
+		}
+
+		if (e.getSource() == be) {
+			index++;
+			inp[index] = n3;
+			index++;
+			ta2.setText(" ");
+			// Size of input array
+			int size = -1;
+			for (int s = 0; s<inp.length; s++) {
+				if (inp[s] == null) {
+					break;
+				} else {
+					size++;
+				}
+			}
+			try {
+				if (size == -1) {}
+			} catch (Exception f) {
+				ta1.setText("Wrong Syntax");
+			}
+			String[] stack = new String[size];
+			String[] exp = new String[size + 2];
+			String[] stacki = new String[size];
+			int j1, topi = -1;
+			float resi;
+			int i, top = 0;
+			int n = -1;
+			for (i = size; i >= 0; i--) {
+				if (inp[i] == "+" || inp[i] == "-") {
+					for (int j = top; j >= 0; j--) {
+						if (stack[j] == "/" || stack[j] == "*") {
+							n++;
+							exp[n] = stack[j];
+							top--;
+						} else {
+							top++;
+							stack[top] = inp[i];
+							break;
+						}
+					}
+				}
+				if (inp[i] == "*" || inp[i] == "/") {
+					top++;
+					stack[top] = inp[i];
+				}
+				if (inp[i] != "+" && inp[i] != "-" && inp[i] != "/" && inp[i] != "*") {
+					n++;
+					exp[n] = inp[i];
+				}
+			}
+			for (int k = 0; k<stack.length; k++) {
+				if (top<0) {
+					break;
+				}
+				n++;
+				exp[n] = stack[top];
+				top--;
+			}
+			for (j1 = 0; j1<exp.length; j1++) {
+				if (exp[j1] != "+" && exp[j1] != "-" && exp[j1] != "/" && exp[j1] != "*") {
+					topi++;
+					stacki[topi] = exp[j1];
+				}
+				if (exp[j1] == "+" || exp[j1] == "*" || exp[j1] == "/" || exp[j1] == "-") {
+					if (exp[j1] == "+") {
+						try {
+							resi = Float.parseFloat(stacki[topi]) + Float.parseFloat(stacki[topi - 1]);
+							topi = topi - 2;
+							topi++;
+							stacki[topi] = Float.toString(resi);
+						} catch (Exception e1) {
+							ta1.setText(" " + e1);
+						}
+					}
+					if (exp[j1] == "-") {
+						try {
+							resi = Float.parseFloat(stacki[topi]) - Float.parseFloat(stacki[topi - 1]);
+							topi = topi - 2;
+							topi++;
+							stacki[topi] = Float.toString(resi);
+						} catch (Exception e4) {
+							ta1.setText("" + e4);
+						}
+					}
+					if (exp[j1] == "/") {
+						try {
+							resi = Float.parseFloat(stacki[topi]) / Float.parseFloat(stacki[topi - 1]);
+							topi = topi - 2;
+							topi++;
+							stacki[topi] = Float.toString(resi);
+						} catch (Exception e3) {
+							ta1.setText("" + e3);
+						}
+					}
+					if (exp[j1] == "*") {
+						try {
+							resi = Float.parseFloat(stacki[topi]) * Float.parseFloat(stacki[topi - 1]);
+							topi = topi - 2;
+							topi++;
+							stacki[topi] = Float.toString(resi);
+						} catch (Exception e2) {
+							ta1.setText("" + e2);
+						}
+					}
+				}
+			}
+			ta1.setForeground(Color.red);
+			ta1.setText(" ");
+			ans = stacki[0];
+			ta1.setText(stacki[0]);
+			ta1.setForeground(Color.red);
+			index = -1;
+			for (int kk = 0; kk<inp.length; kk++) {
+				if (inp[kk] == null) {
+					break;
+				} else {
+					inp[kk] = null;
+				}
+			}
+			for (int kk = 0; kk<exp.length; kk++) {
+				if (exp[kk] == null) {
+					break;
+				} else {
+					exp[kk] = null;
+				}
+			}
+			for (int kk = 0; kk<stack.length; kk++) {
+				if (inp[kk] == null) {
+					break;
+				} else {
+					stack[kk] = null;
+				}
+			}
+		}
+		if (e.getSource() == bc) {
+			ta2.setForeground(Color.black);
+			ta1.setText(" ");
+			ta2.setText(" ");
+		}
+	}
+	public static void main(String[] args) {
+		Calculator cc = new Calculator();
+	}
+}
